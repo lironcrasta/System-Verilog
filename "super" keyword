@@ -1,0 +1,22 @@
+class transaction;
+int id;
+virtual function void print();
+$display("Transaction ID:%0d",id);
+endfunction
+endclass
+class error_transaction extends transaction;
+string err_msg;
+function void print();
+super.print();
+$display("Error Message:%s",err_msg);
+endfunction
+endclass
+module tb_super;
+error_transaction tr;
+initial begin
+tr=new();
+tr.id=101;
+tr.err_msg="Timeout Error";
+tr.print();
+end
+endmodule
