@@ -1,0 +1,33 @@
+class fulladder;
+bit a;
+bit b;
+bit cin;
+bit sum;
+bit cout;
+function new(bit x=0, bit y=0, bit z=0);
+a=x;
+b=y;
+cin=z;
+endfunction
+function void compute();
+sum=a^b^cin;
+cout=(a&b)|(b&cin)|(cin&a);
+endfunction
+function void display();
+$display("Input:A=%b,B=%b,Cin=%b,Outputs:Sum=%b,Cout=%b",a,b,cin,sum,cout);
+endfunction
+endclass
+module tb_fulladder;
+fulladder fa_obj;
+initial begin
+fa_obj=new();
+
+for(int i=0; i<8;i=i+1)
+begin
+{fa_obj.a,fa_obj.b,fa_obj.cin}=i;
+fa_obj.compute();#10;
+fa_obj.display();
+end
+#10; $finish;
+end 
+endmodule
